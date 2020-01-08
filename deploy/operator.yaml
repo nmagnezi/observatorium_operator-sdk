@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: observatorium-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: observatorium-operator
+  template:
+    metadata:
+      labels:
+        name: observatorium-operator
+    spec:
+      serviceAccountName: observatorium-operator
+      containers:
+        - name: observatorium-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - observatorium-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "observatorium-operator"
