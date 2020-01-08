@@ -9,9 +9,21 @@ import (
 
 // ObservatoriumSpec defines the desired state of Observatorium
 type ObservatoriumSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "operator-sdk generate k8s" to regenerate code after modifying this file
-	// Add custom validation using kubebuilder tags: https://book-v1.book.kubebuilder.io/beyond_basics/generating_crd.html
+	// Thanos Spec
+	Thanos ThanosSpec `json:"thanos"`
+}
+
+type ThanosSpec struct {
+	// Thanos Image name
+	Image string `json:"image"`
+	// Version describes the version of Thanos to use.
+	Version *string `json:"version,omitempty"`
+	// Tag of Thanos sidecar container image to be deployed. Defaults to the value of `version`.
+	// Version is ignored if Tag is set.
+	Tag string `json:"tag"`
+
+	// Number of instances to deploy for a Thanos querier.
+	QuerierReplicas *int32 `json:"querierreplicas,omitempty"`
 }
 
 // ObservatoriumStatus defines the observed state of Observatorium
