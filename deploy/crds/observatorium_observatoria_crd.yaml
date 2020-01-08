@@ -30,6 +30,31 @@ spec:
           type: object
         spec:
           description: ObservatoriumSpec defines the desired state of Observatorium
+          properties:
+            thanos:
+              description: Thanos Spec
+              properties:
+                image:
+                  description: Thanos Image name
+                  type: string
+                querierreplicas:
+                  description: Number of instances to deploy for a Thanos querier.
+                  format: int32
+                  type: integer
+                tag:
+                  description: Tag of Thanos sidecar container image to be deployed.
+                    Defaults to the value of `version`. Version is ignored if Tag
+                    is set.
+                  type: string
+                version:
+                  description: Version describes the version of Thanos to use.
+                  type: string
+              required:
+              - image
+              - tag
+              type: object
+          required:
+          - thanos
           type: object
         status:
           description: ObservatoriumStatus defines the observed state of Observatorium
