@@ -34,24 +34,48 @@ spec:
             thanos:
               description: Thanos Spec
               properties:
+                compactorReplicas:
+                  description: Number of instances to deploy for a Thanos Compactor.
+                  format: int32
+                  type: integer
                 image:
                   description: Thanos Image name
                   type: string
-                querierreplicas:
+                objectStoreConfigSecret:
+                  description: Object Store Config Secret for Thanos
+                  type: string
+                querierReplicas:
                   description: Number of instances to deploy for a Thanos querier.
+                  format: int32
+                  type: integer
+                receiveReplicas:
+                  description: Number of instances to deploy for a Thanos Receive.
+                  format: int32
+                  type: integer
+                storeReplicas:
+                  description: Number of instances to deploy for a Thanos Store.
                   format: int32
                   type: integer
                 tag:
                   description: Tag of Thanos sidecar container image to be deployed.
-                    Defaults to the value of `version`. Version is ignored if Tag
-                    is set.
                   type: string
-                version:
-                  description: Version describes the version of Thanos to use.
-                  type: string
+                thanosReceiveControllerSpec:
+                  properties:
+                    image:
+                      description: Thanos receive controller Image name
+                      type: string
+                    tag:
+                      description: Tag describes the tag of Thanos receive controller
+                        to use.
+                      type: string
+                  required:
+                  - image
+                  type: object
               required:
               - image
+              - objectStoreConfigSecret
               - tag
+              - thanosReceiveControllerSpec
               type: object
           required:
           - thanos

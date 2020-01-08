@@ -13,18 +13,37 @@ type ObservatoriumSpec struct {
 	Thanos ThanosSpec `json:"thanos"`
 }
 
+type ThanosReceiveController struct {
+	// Thanos receive controller Image name
+	Image *string `json:"image"`
+	// Tag describes the tag of Thanos receive controller to use.
+	Tag *string `json:"tag,omitempty"`
+}
+
 type ThanosSpec struct {
 	// Thanos Image name
-	Image string `json:"image"`
-	// Version describes the version of Thanos to use.
-	Version *string `json:"version,omitempty"`
-	// Tag of Thanos sidecar container image to be deployed. Defaults to the value of `version`.
-	// Version is ignored if Tag is set.
-	Tag string `json:"tag"`
+	Image *string `json:"image"`
+	// Tag of Thanos sidecar container image to be deployed.
+	Tag *string `json:"tag"`
 
+	ThanosReceiveControllerSpec ThanosReceiveController `json:"thanosReceiveControllerSpec"` 
 	// Number of instances to deploy for a Thanos querier.
-	QuerierReplicas *int32 `json:"querierreplicas,omitempty"`
+	QuerierReplicas *int32 `json:"querierReplicas,omitempty"`
+	// Number of instances to deploy for a Thanos Store.
+	StoreReplicas *int32 `json:"storeReplicas,omitempty"`
+	// Number of instances to deploy for a Thanos Compactor.
+	CompactorReplicas *int32 `json:"compactorReplicas,omitempty"`
+	// Number of instances to deploy for a Thanos Receive.
+	ReceiveReplicas *int32 `json:"receiveReplicas,omitempty"`
+    // Object Store Config Secret for Thanos 
+    ObjectStoreConfigSecret *string `json:"objectStoreConfigSecret"`
+    // TODO: AWS secrets?
+	// TODO: Resource limits for: QUERIER, STORE, RECEIVE, COMPACTOR
+	// TODO: handle with THANOS_QUERIER_SVC_URL
+	// TODO: Do we need a THANOS_RULER?
+	// TODO: JAEGER
 }
+
 
 // ObservatoriumStatus defines the observed state of Observatorium
 type ObservatoriumStatus struct {
