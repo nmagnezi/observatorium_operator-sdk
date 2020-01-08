@@ -38,6 +38,24 @@ spec:
                   description: Number of instances to deploy for a Thanos Compactor.
                   format: int32
                   type: integer
+                compactorResources:
+                  description: Resources for Compactor pods
+                  properties:
+                    limits:
+                      additionalProperties:
+                        type: string
+                      description: 'Limits describes the maximum amount of compute
+                        resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                    requests:
+                      additionalProperties:
+                        type: string
+                      description: 'Requests describes the minimum amount of compute
+                        resources required. If Requests is omitted for a container,
+                        it defaults to Limits if that is explicitly specified, otherwise
+                        to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                  type: object
                 image:
                   description: Thanos Image name
                   type: string
@@ -48,14 +66,68 @@ spec:
                   description: Number of instances to deploy for a Thanos querier.
                   format: int32
                   type: integer
+                querierResources:
+                  description: Resources for Querier pods
+                  properties:
+                    limits:
+                      additionalProperties:
+                        type: string
+                      description: 'Limits describes the maximum amount of compute
+                        resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                    requests:
+                      additionalProperties:
+                        type: string
+                      description: 'Requests describes the minimum amount of compute
+                        resources required. If Requests is omitted for a container,
+                        it defaults to Limits if that is explicitly specified, otherwise
+                        to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                  type: object
                 receiveReplicas:
                   description: Number of instances to deploy for a Thanos Receive.
                   format: int32
                   type: integer
+                receiveResources:
+                  description: Resources for Receive pods
+                  properties:
+                    limits:
+                      additionalProperties:
+                        type: string
+                      description: 'Limits describes the maximum amount of compute
+                        resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                    requests:
+                      additionalProperties:
+                        type: string
+                      description: 'Requests describes the minimum amount of compute
+                        resources required. If Requests is omitted for a container,
+                        it defaults to Limits if that is explicitly specified, otherwise
+                        to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                  type: object
                 storeReplicas:
                   description: Number of instances to deploy for a Thanos Store.
                   format: int32
                   type: integer
+                storeResources:
+                  description: Resources for Store pods
+                  properties:
+                    limits:
+                      additionalProperties:
+                        type: string
+                      description: 'Limits describes the maximum amount of compute
+                        resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                    requests:
+                      additionalProperties:
+                        type: string
+                      description: 'Requests describes the minimum amount of compute
+                        resources required. If Requests is omitted for a container,
+                        it defaults to Limits if that is explicitly specified, otherwise
+                        to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
+                      type: object
+                  type: object
                 tag:
                   description: Tag of Thanos sidecar container image to be deployed.
                   type: string
@@ -68,6 +140,22 @@ spec:
                       description: Tag describes the tag of Thanos receive controller
                         to use.
                       type: string
+                    tahashringsg:
+                      description: Hashrings describes a list of Hashrings
+                      items:
+                        properties:
+                          name:
+                            description: Thanos Hashring name
+                            type: string
+                          tenants:
+                            description: Tenants describes a lists of tenants.
+                            items:
+                              type: string
+                            type: array
+                        required:
+                        - name
+                        type: object
+                      type: array
                   required:
                   - image
                   type: object
