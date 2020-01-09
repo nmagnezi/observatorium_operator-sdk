@@ -1,6 +1,7 @@
 package v1alpha1
 
 import (
+	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -18,6 +19,16 @@ type ThanosReceiveController struct {
 	Image *string `json:"image"`
 	// Tag describes the tag of Thanos receive controller to use.
 	Tag *string `json:"tag,omitempty"`
+	// Hashrings describes a list of Hashrings
+	Hashrings []*Hashring `json:"hashring,omitempty"`
+}
+
+type Hashring struct {
+	// Thanos Hashring name
+	Name *string `json:"name"`
+	// Tenants describes a lists of tenants.
+	Tenants []*string `json:"tenants,omitempty"`
+	//
 }
 
 type ThanosSpec struct {
@@ -26,24 +37,30 @@ type ThanosSpec struct {
 	// Tag of Thanos sidecar container image to be deployed.
 	Tag *string `json:"tag"`
 
-	ThanosReceiveControllerSpec ThanosReceiveController `json:"thanosReceiveControllerSpec"` 
+	ThanosReceiveControllerSpec ThanosReceiveController `json:"thanosReceiveControllerSpec"`
 	// Number of instances to deploy for a Thanos querier.
 	QuerierReplicas *int32 `json:"querierReplicas,omitempty"`
+	// Resources for Querier pods
+	QuerierResources v1.ResourceRequirements `json:"querierResources,omitempty"`
 	// Number of instances to deploy for a Thanos Store.
 	StoreReplicas *int32 `json:"storeReplicas,omitempty"`
+	// Resources for Store pods
+	StoreResources v1.ResourceRequirements `json:"storeResources,omitempty"`
 	// Number of instances to deploy for a Thanos Compactor.
 	CompactorReplicas *int32 `json:"compactorReplicas,omitempty"`
+	// Resources for Compactor pods
+	CompactorResources v1.ResourceRequirements `json:"compactorResources,omitempty"`
 	// Number of instances to deploy for a Thanos Receive.
 	ReceiveReplicas *int32 `json:"receiveReplicas,omitempty"`
-    // Object Store Config Secret for Thanos 
-    ObjectStoreConfigSecret *string `json:"objectStoreConfigSecret"`
-    // TODO: AWS secrets?
-	// TODO: Resource limits for: QUERIER, STORE, RECEIVE, COMPACTOR
+	// Resources for Receive pods
+	ReceiveResources v1.ResourceRequirements `json:"receiveResources,omitempty"`
+	// Object Store Config Secret for Thanos
+	ObjectStoreConfigSecret *string `json:"objectStoreConfigSecret"`
+	// TODO: AWS secrets?
 	// TODO: handle with THANOS_QUERIER_SVC_URL
 	// TODO: Do we need a THANOS_RULER?
 	// TODO: JAEGER
 }
-
 
 // ObservatoriumStatus defines the observed state of Observatorium
 type ObservatoriumStatus struct {
