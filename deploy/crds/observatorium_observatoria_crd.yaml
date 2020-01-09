@@ -133,14 +133,7 @@ spec:
                   type: string
                 thanosReceiveControllerSpec:
                   properties:
-                    image:
-                      description: Thanos receive controller Image name
-                      type: string
-                    tag:
-                      description: Tag describes the tag of Thanos receive controller
-                        to use.
-                      type: string
-                    tahashringsg:
+                    hashrings:
                       description: Hashrings describes a list of Hashrings
                       items:
                         properties:
@@ -156,6 +149,13 @@ spec:
                         - name
                         type: object
                       type: array
+                    image:
+                      description: Thanos receive controller Image name
+                      type: string
+                    tag:
+                      description: Tag describes the tag of Thanos receive controller
+                        to use.
+                      type: string
                   required:
                   - image
                   type: object

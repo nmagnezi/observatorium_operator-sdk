@@ -20,7 +20,7 @@ type ThanosReceiveController struct {
 	// Tag describes the tag of Thanos receive controller to use.
 	Tag *string `json:"tag,omitempty"`
 	// Hashrings describes a list of Hashrings
-	Hashrings []*Hashring `json:"hashring,omitempty"`
+	Hashrings []*Hashring `json:"hashrings,omitempty"`
 }
 
 type Hashring struct {
