@@ -84,6 +84,9 @@ spec:
                         to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
                       type: object
                   type: object
+                receivePvcSize:
+                  description: Receive PVC size
+                  type: string
                 receiveReplicas:
                   description: Number of instances to deploy for a Thanos Receive.
                   format: int32
@@ -106,6 +109,9 @@ spec:
                         to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
                       type: object
                   type: object
+                receiveStorageClass:
+                  description: Receive Storage Class
+                  type: string
                 storeReplicas:
                   description: Number of instances to deploy for a Thanos Store.
                   format: int32
@@ -133,14 +139,7 @@ spec:
                   type: string
                 thanosReceiveControllerSpec:
                   properties:
-                    image:
-                      description: Thanos receive controller Image name
-                      type: string
-                    tag:
-                      description: Tag describes the tag of Thanos receive controller
-                        to use.
-                      type: string
-                    tahashringsg:
+                    hashrings:
                       description: Hashrings describes a list of Hashrings
                       items:
                         properties:
@@ -156,12 +155,21 @@ spec:
                         - name
                         type: object
                       type: array
+                    image:
+                      description: Thanos receive controller Image name
+                      type: string
+                    tag:
+                      description: Tag describes the tag of Thanos receive controller
+                        to use.
+                      type: string
                   required:
                   - image
                   type: object
               required:
               - image
               - objectStoreConfigSecret
+              - receivePvcSize
+              - receiveStorageClass
               - tag
               - thanosReceiveControllerSpec
               type: object

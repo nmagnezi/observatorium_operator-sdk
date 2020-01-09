@@ -209,6 +209,16 @@ func (in *ThanosSpec) DeepCopyInto(out *ThanosSpec) {
 		**out = **in
 	}
 	in.ReceiveResources.DeepCopyInto(&out.ReceiveResources)
+	if in.ReceiveStorageClass != nil {
+		in, out := &in.ReceiveStorageClass, &out.ReceiveStorageClass
+		*out = new(string)
+		**out = **in
+	}
+	if in.ReceivePVCSize != nil {
+		in, out := &in.ReceivePVCSize, &out.ReceivePVCSize
+		*out = new(string)
+		**out = **in
+	}
 	if in.ObjectStoreConfigSecret != nil {
 		in, out := &in.ObjectStoreConfigSecret, &out.ObjectStoreConfigSecret
 		*out = new(string)
