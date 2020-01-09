@@ -54,6 +54,10 @@ type ThanosSpec struct {
 	ReceiveReplicas *int32 `json:"receiveReplicas,omitempty"`
 	// Resources for Receive pods
 	ReceiveResources v1.ResourceRequirements `json:"receiveResources,omitempty"`
+	// Receive Storage Class
+	ReceiveStorageClass *string `json:"receiveStorageClass"`
+	// Receive PVC size
+	ReceivePVCSize *string `json:"receivePvcSize"`
 	// Object Store Config Secret for Thanos
 	ObjectStoreConfigSecret *string `json:"objectStoreConfigSecret"`
 	// TODO: AWS secrets?

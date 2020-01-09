@@ -84,6 +84,9 @@ spec:
                         to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
                       type: object
                   type: object
+                receivePvcSize:
+                  description: Receive PVC size
+                  type: string
                 receiveReplicas:
                   description: Number of instances to deploy for a Thanos Receive.
                   format: int32
@@ -106,6 +109,9 @@ spec:
                         to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/'
                       type: object
                   type: object
+                receiveStorageClass:
+                  description: Receive Storage Class
+                  type: string
                 storeReplicas:
                   description: Number of instances to deploy for a Thanos Store.
                   format: int32
@@ -162,6 +168,8 @@ spec:
               required:
               - image
               - objectStoreConfigSecret
+              - receivePvcSize
+              - receiveStorageClass
               - tag
               - thanosReceiveControllerSpec
               type: object
